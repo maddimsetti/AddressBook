@@ -1,35 +1,39 @@
 package com.addressbook;
 
+import java.util.Scanner;
+
 public class AddressBook {
-    String firstName,lastName,address,city,state,eMail,phoneNumber;
-    int zip;
+    void addContactDetails () {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("enter the First Name");
+        String firstName = sc.nextLine();
+        System.out.println("enter the Last Name");
+        String lastName = sc.nextLine();
+        System.out.println("enter the Address");
+        String address = sc.nextLine();
+        System.out.println("enter the City");
+        String city = sc.nextLine();
+        System.out.println("enter the State");
+        String state = sc.nextLine();
+        System.out.println("enter the Zip Code");
+        int zipCode = sc.nextInt();
+        sc.nextLine();
+        System.out.println("enter the Email address");
+        String eMail = sc.nextLine();
+        System.out.println("enter the Phone Number");
+        String phoneNumber = sc.nextLine();
 
-    public AddressBook (String firstName,String lastName,String address,String city,String state,
-                 int zip,String eMail, String phoneNumber) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.city = city;
-        this.state = state;
-        this.zip = zip;
-        this.eMail = eMail;
-        this.phoneNumber = phoneNumber;
+        ContactPerson contact = new ContactPerson(firstName,lastName,address,city,state,zipCode,eMail,phoneNumber);
+        contact.addressBook();
     }
 
-    public void addressBook() {
-        System.out.println("First Name: "+firstName);
-        System.out.println("Last Name: "+lastName);
-        System.out.println("Address: "+address);
-        System.out.println("City: "+city);
-        System.out.println("State: "+state);
-        System.out.println("Zip: "+zip);
-        System.out.println("Email Address: "+eMail);
-        System.out.println("Phone Number: "+phoneNumber);
-    }
+
+
+
     public static void main (String[] args) {
         System.out.println("Welcome to Address Book Program in AddressBook in Main Class");
-        AddressBook book = new AddressBook(null,null,null,null,null,0,null,null);
-        book.addressBook();
+        AddressBook contact = new AddressBook();
+        contact.addContactDetails();
     }
 
 }
