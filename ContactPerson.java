@@ -2,17 +2,44 @@ package com.addressbook;
 
 public class ContactPerson {
     String firstName,lastName,address,city,state,eMail,phoneNumber;
-    int zip;
+    int zipCode;
 
     public ContactPerson (String firstName,String lastName,String address,String city,String state,
-                        int zip,String eMail, String phoneNumber) {
+                        int zipCode,String eMail, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.city = city;
         this.state = state;
-        this.zip = zip;
+        this.zipCode = zipCode;
         this.eMail = eMail;
+        this.phoneNumber = phoneNumber;
+    }
+    public String getFirstName() {
+        return firstName;
+    }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    public void setCity(String city) {
+        this.city = city;
+    }
+    public void setState(String state) {
+        this.state = state;
+    }
+    public void setZipCode(int zipCode) {
+        this.zipCode = zipCode;
+    }
+    public void setMail(String eMail) {
+        this.eMail = eMail;
+    }
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
     public void addressBook() {
@@ -21,7 +48,7 @@ public class ContactPerson {
         System.out.println("Address: "+address);
         System.out.println("City: "+city);
         System.out.println("State: "+state);
-        System.out.println("Zip: "+zip);
+        System.out.println("ZipCode: "+zipCode);
         System.out.println("Email Address: "+eMail);
         System.out.println("Phone Number: "+phoneNumber);
     }
