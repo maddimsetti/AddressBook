@@ -7,7 +7,8 @@ import java.util.*;
  */
 public class AddressBook {
     public static final Scanner sc = new Scanner(System.in);
-    private static final ArrayList<ContactPerson> person = new ArrayList<ContactPerson>();
+    private static final ArrayList<ContactPerson> person = new ArrayList<>();
+    private static HashMap<String, ArrayList<ContactPerson>> addressBookSystem = new HashMap<>();
 
     /**
      * Create Method to Add the Contact List.
@@ -137,8 +138,7 @@ public class AddressBook {
     }
 
     // Explaining the Method How We Implement
-    public static void main (String[] args) {
-        System.out.println("Welcome to Address Book Program in AddressBook in Main Class");
+    public static void addressBook() {
         boolean option = false;
         while (true) {
             System.out.println("1.Add the Contact\n, 2.Edit the Contact list\n, 3.Delete the Contact\n, 4.Exit the loop");
@@ -160,11 +160,27 @@ public class AddressBook {
                     deleteContact.deleteContactByFirstName();       //Calling Delete Contact Method
                     option = true;
                 }
-                case 4 -> System.exit(0);      // Exit the Loop
+                case 4 -> {
+                    System.exit(0);
+                }
                 default -> {
                     System.out.println("Choice is incorrect");
                 }
             }
+        }
+    }
+
+    public static void main (String[] args) {
+        System.out.println("Welcome to Address Book Program in AddressBook in Main Class");
+        System.out.println("Enter the Name of the Address Book");
+        sc.nextLine();
+        String addressBookName = sc.nextLine();
+        if (addressBookSystem.containsKey(addressBookName)) {
+            System.out.println("This Address Book Already Exists");
+        } else {
+            AddressBook addAddressBook = new AddressBook();
+            addressBookSystem.put(addressBookName, person);
+            addAddressBook.addressBook();
         }
     }
 }
