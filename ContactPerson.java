@@ -15,8 +15,30 @@ public class ContactPerson {
         this.eMail = eMail;
         this.phoneNumber = phoneNumber;
     }
+
     public String getFirstName() {
         return firstName;
+    }
+    public String getLastName() {
+        return lastName;
+    }
+    public String getAddress() {
+        return address;
+    }
+    public String getCity() {
+        return city;
+    }
+    public String getState() {
+        return state;
+    }
+    public int getZipCode() {
+        return zipCode;
+    }
+    public String getMail() {
+        return eMail;
+    }
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
     public void setFirstName(String firstName) {
         this.firstName = firstName;

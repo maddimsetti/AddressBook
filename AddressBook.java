@@ -1,12 +1,17 @@
 package com.addressbook;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
+/**
+ * Create Class for Defining the Address Book
+ */
 public class AddressBook {
     public static final Scanner sc = new Scanner(System.in);
     private static final ArrayList<ContactPerson> person = new ArrayList<ContactPerson>();
 
+    /**
+     * Create Method to Add the Contact List.
+     */
     void addContactDetails () {
         Scanner sc = new Scanner(System.in);
         System.out.println("enter the First Name");
@@ -28,12 +33,15 @@ public class AddressBook {
         String phoneNumber = sc.nextLine();
 
         ContactPerson contacts = new ContactPerson(firstName,lastName,address,city,state,zipCode,eMail,phoneNumber);
-        person.add(contacts);
-        contacts.addressBook();
+        person.add(contacts);    //Adding Contact list to ArrayList
+        contacts.addressBook();  // Printing the Contact list
     }
 
-    public static void editContactDetails() {
-        System.out.println("Enter First Name to edit Contact list");
+    /**
+     * Create Method to Edit the Contact using First Name.
+     */
+    public static void editContactDetailsByFirstName() {
+        System.out.println("Enter First Name to verify and edit the Contact list");
         Scanner sc = new Scanner(System.in);
         String firstName = sc.nextLine();
         int flag = 0;
@@ -42,7 +50,7 @@ public class AddressBook {
                 System.out.println("1.First Name\n,2.Second Name\n,3.Address\n,4.City\n,5.State\n,6.Zip Code\n,7.Email Address\n,8.Phone Number\n");
                 System.out.println("Enter the choice What you want to Edit");
                 int choice = sc.nextInt();
-                switch (choice) {
+                switch (choice) {       // choosing which option as to edit
                     case 1 -> {
                         System.out.println("Enter the New First Name");
                         Scanner sc1 = new Scanner(System.in);
@@ -92,41 +100,71 @@ public class AddressBook {
                         contacts.setPhoneNumber(phoneNumber);
                     }
                 }
-                flag =1;
+                flag =1 ;
             }
             if(flag == 1) {
                 System.out.println("Contacts are Updated");
+                for (int i = 0; i<person.size(); i++) {     //Printing the Updated Contact
+                    System.out.println("FirstName: " + person.get(i).firstName + "\nLastName: " + person.get(i).lastName + "\nAddress: " + person.get(i).address +
+                            "\nCity: " + person.get(i).city + "\nState: " + person.get(i).state + "\nZipCode: " + person.get(i).zipCode + "\nEmailAddress: " + person.get(i).eMail +
+                            "\nPhoneNumber: " + person.get(i).phoneNumber);
+                }
             }
             else {
                 System.out.println("Contact not Found for Editing");
+                break;
             }
         }
     }
 
+    /**
+     * Create Method to Delete the Contact. Will work  as there is no  contacts with  first name.
+     */
+    public static void deleteContactByFirstName() {
+        System.out.println("Enter the First Name to verify and delete the contact");
+        Scanner sc = new Scanner(System.in);
+        String firstName = sc.nextLine();
+        int flag = 0;
+        for (Iterator<ContactPerson> iterator = person.iterator(); iterator.hasNext();) {
+            ContactPerson temp = iterator.next();
+            if (temp.getFirstName().equalsIgnoreCase(firstName)){
+                iterator.remove();
+                System.out.println("The Contact with First Name " +firstName+ " Deleted Successfully");
+                return;
+            }
+        }
+        System.out.println("No contact With First Name " +firstName+ " will found" );
+    }
+
+    // Explaining the Method How We Implement
     public static void main (String[] args) {
         System.out.println("Welcome to Address Book Program in AddressBook in Main Class");
         boolean option = false;
         while (true) {
-            System.out.println("1.Create\n, 2.Edit\n, 3.Exit the loop");
+            System.out.println("1.Add the Contact\n, 2.Edit the Contact list\n, 3.Delete the Contact\n, 4.Exit the loop");
             System.out.println("Enter the choice What you want do");
             int choice = sc.nextInt();
             switch (choice) {
                 case 1 -> {
                     AddressBook addContact = new AddressBook();
-                    addContact.addContactDetails();
+                    addContact.addContactDetails();     //calling AddContact Method
                     option = true;
                 }
                 case 2 -> {
                     AddressBook editContact = new AddressBook();
-                    editContact.editContactDetails();
+                    editContact.editContactDetailsByFirstName();   // Calling Edit Contact method
                     option = true;
                 }
-                case 3 -> System.exit(0);
+                case 3 -> {
+                    AddressBook deleteContact = new AddressBook();
+                    deleteContact.deleteContactByFirstName();       //Calling Delete Contact Method
+                    option = true;
+                }
+                case 4 -> System.exit(0);      // Exit the Loop
                 default -> {
                     System.out.println("Choice is incorrect");
                 }
             }
         }
     }
-
 }
