@@ -13,28 +13,33 @@ public class AddressBook {
      * Create Method to Add the Contact List.
      */
     void addContactDetails () {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("enter the First Name");
-        String firstName = sc.nextLine();
-        System.out.println("enter the Last Name");
-        String lastName = sc.nextLine();
-        System.out.println("enter the Address");
-        String address = sc.nextLine();
-        System.out.println("enter the City");
-        String city = sc.nextLine();
-        System.out.println("enter the State");
-        String state = sc.nextLine();
-        System.out.println("enter the Zip Code");
-        int zipCode = sc.nextInt();
-        sc.nextLine();
-        System.out.println("enter the Email address");
-        String eMail = sc.nextLine();
-        System.out.println("enter the Phone Number");
-        String phoneNumber = sc.nextLine();
 
-        ContactPerson contacts = new ContactPerson(firstName,lastName,address,city,state,zipCode,eMail,phoneNumber);
-        person.add(contacts);    //Adding Contact list to ArrayList
-        contacts.addressBook();  // Printing the Contact list
+        System.out.println("How Many Contacts Do You Want to Enter In Address Book");
+        int numberOfContacts = sc.nextInt();
+        for (int i=1; i<=numberOfContacts; i++ ) {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("enter the First Name");
+            String firstName = sc.nextLine();
+            System.out.println("enter the Last Name");
+            String lastName = sc.nextLine();
+            System.out.println("enter the Address");
+            String address = sc.nextLine();
+            System.out.println("enter the City");
+            String city = sc.nextLine();
+            System.out.println("enter the State");
+            String state = sc.nextLine();
+            System.out.println("enter the Zip Code");
+            int zipCode = sc.nextInt();
+            sc.nextLine();
+            System.out.println("enter the Email address");
+            String eMail = sc.nextLine();
+            System.out.println("enter the Phone Number");
+            String phoneNumber = sc.nextLine();
+
+            ContactPerson contacts = new ContactPerson(firstName, lastName, address, city, state, zipCode, eMail, phoneNumber);
+            person.add(contacts);    //Adding Contact list to ArrayList
+            contacts.addressBook();  // Printing the Contact list
+        }
     }
 
     /**
@@ -44,9 +49,9 @@ public class AddressBook {
         System.out.println("Enter First Name to verify and edit the Contact list");
         Scanner sc = new Scanner(System.in);
         String firstName = sc.nextLine();
-        int flag = 0;
-        for (ContactPerson contacts : person) {
-            if (contacts.getFirstName().equals(firstName)) {
+        for (Iterator<ContactPerson> iterator = person.iterator(); iterator.hasNext();) {
+            ContactPerson temp = iterator.next();
+            if (temp.getFirstName().equalsIgnoreCase(firstName)) {
                 System.out.println("1.First Name\n,2.Second Name\n,3.Address\n,4.City\n,5.State\n,6.Zip Code\n,7.Email Address\n,8.Phone Number\n");
                 System.out.println("Enter the choice What you want to Edit");
                 int choice = sc.nextInt();
@@ -55,66 +60,61 @@ public class AddressBook {
                         System.out.println("Enter the New First Name");
                         Scanner sc1 = new Scanner(System.in);
                         firstName = sc1.nextLine();
-                        contacts.setFirstName(firstName);
+                        temp.setFirstName(firstName);
                     }
                     case 2 -> {
                         System.out.println("Enter the New Last Name");
                         Scanner sc2 = new Scanner(System.in);
                         String lastName = sc2.nextLine();
-                        contacts.setLastName(lastName);
+                        temp.setLastName(lastName);
                     }
                     case 3 -> {
                         System.out.println("Enter the Address");
                         Scanner sc3 = new Scanner(System.in);
                         String address = sc3.nextLine();
-                        contacts.setAddress(address);
+                        temp.setAddress(address);
                     }
                     case 4 -> {
                         System.out.println("Enter the New City");
                         Scanner sc4 = new Scanner(System.in);
                         String city = sc4.nextLine();
-                        contacts.setCity(city);
+                        temp.setCity(city);
                     }
                     case 5 -> {
                         System.out.println("Enter the New State");
                         Scanner sc5 = new Scanner(System.in);
                         String state = sc5.nextLine();
-                        contacts.setState(state);
+                        temp.setState(state);
                     }
                     case 6 -> {
                         System.out.println("Enter the New Zip Code");
                         Scanner sc6 = new Scanner(System.in);
                         int zipCode = sc6.nextInt();
-                        contacts.setZipCode(zipCode);
+                        temp.setZipCode(zipCode);
                     }
                     case 7 -> {
                         System.out.println("Enter the New Email Address");
                         Scanner sc7 = new Scanner(System.in);
                         String eMail = sc7.nextLine();
-                        contacts.setMail(eMail);
+                        temp.setMail(eMail);
                     }
                     case 8 -> {
                         System.out.println("Enter the New Phone Number");
                         Scanner sc8 = new Scanner(System.in);
                         String phoneNumber = sc8.nextLine();
-                        contacts.setPhoneNumber(phoneNumber);
+                        temp.setPhoneNumber(phoneNumber);
                     }
                 }
-                flag =1 ;
-            }
-            if(flag == 1) {
                 System.out.println("Contacts are Updated");
-                for (int i = 0; i<person.size(); i++) {     //Printing the Updated Contact
+                for (int i = 1; i<=person.size(); i++) {     //Printing the Updated Contact
                     System.out.println("FirstName: " + person.get(i).firstName + "\nLastName: " + person.get(i).lastName + "\nAddress: " + person.get(i).address +
                             "\nCity: " + person.get(i).city + "\nState: " + person.get(i).state + "\nZipCode: " + person.get(i).zipCode + "\nEmailAddress: " + person.get(i).eMail +
                             "\nPhoneNumber: " + person.get(i).phoneNumber);
+                return;
                 }
             }
-            else {
-                System.out.println("Contact not Found for Editing");
-                break;
-            }
         }
+        System.out.println("No Contact Found To Edit");
     }
 
     /**
