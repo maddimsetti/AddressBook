@@ -14,7 +14,6 @@ public class AddressBook {
      * Create Method to Add the Contact List.
      */
     void addContactDetails () {
-
         System.out.println("How Many Contacts Do You Want to Enter In Address Book");
         int numberOfContacts = sc.nextInt();
         for (int i=1; i<=numberOfContacts; i++ ) {
@@ -38,9 +37,20 @@ public class AddressBook {
             String phoneNumber = sc.nextLine();
 
             ContactPerson contacts = new ContactPerson(firstName, lastName, address, city, state, zipCode, eMail, phoneNumber);
-            person.add(contacts);    //Adding Contact list to ArrayList
             contacts.addressBook();  // Printing the Contact list
+            String pName = firstName + lastName;
+            for (Iterator<ContactPerson> iterator = person.iterator(); iterator.hasNext();) {
+                ContactPerson temp = iterator.next();
+                String contactName =  temp.getFirstName() + temp.getLastName();
+                if(contactName.equals(pName)) {
+                    System.out.println("Sorry this contact already exists.");
+                    return; // the name exists, so we exit the method.
+                }
+            }
+            // Otherwise... you've checked all the elements, and have not found a duplicate
+            person.add(contacts);    //Adding Contact list to ArrayList
         }
+
     }
 
     /**
@@ -121,7 +131,7 @@ public class AddressBook {
     /**
      * Create Method to Delete the Contact. Will work  as there is no  contacts with  first name.
      */
-    public static void deleteContactByFirstName() {
+        public static void deleteContactByFirstName() {
         System.out.println("Enter the First Name to verify and delete the contact");
         Scanner sc = new Scanner(System.in);
         String firstName = sc.nextLine();
@@ -176,7 +186,7 @@ public class AddressBook {
         sc.nextLine();
         String addressBookName = sc.nextLine();
         if (addressBookSystem.containsKey(addressBookName)) {
-            System.out.println("This Address Book Already Exists");
+            System.out.println("This Address Book System Already Exists");
         } else {
             AddressBook addAddressBook = new AddressBook();
             addressBookSystem.put(addressBookName, person);
