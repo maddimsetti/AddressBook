@@ -1,6 +1,8 @@
 package com.addressbook;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Create Class for Defining the Address Book
@@ -147,11 +149,39 @@ public class AddressBook {
         System.out.println("No contact With First Name " +firstName+ " will found" );
     }
 
+    /**
+     * Create Method to Search the Contact By Using City Name
+     */
+    public void searchPersonByCity() {
+        System.out.println("Enter the City");
+        Scanner sc = new Scanner(System.in);
+        String city = sc.nextLine();
+        List<ContactPerson> search = person.stream().filter(first -> first.getCity().equals(city)).collect(Collectors.toList());
+            for (ContactPerson contacts : search ) {
+                System.out.println("FirstName: " +contacts.getFirstName());
+                System.out.println("LastName: " +contacts.getLastName());
+            }
+    }
+
+    /**
+     * Create Method to Search the Contact By Using State Name
+     */
+    public void searchPersonByState() {
+        System.out.println("Enter the State");
+        Scanner sc = new Scanner(System.in);
+        String state = sc.nextLine();
+        List<ContactPerson> search = person.stream().filter(first -> first.getState().equals(state)).collect(Collectors.toList());
+        for (ContactPerson contacts : search ) {
+            System.out.println("FirstName: " +contacts.getFirstName());
+            System.out.println("LastName: " +contacts.getLastName());
+        }
+    }
+
     // Explaining the Method How We Implement
     public static void addressBook() {
         boolean option = false;
         while (true) {
-            System.out.println("1.Add the Contact\n, 2.Edit the Contact list\n, 3.Delete the Contact\n, 4.Exit the loop");
+            System.out.println("1.Add the Contact\n, 2.Edit the Contact list\n, 3.Delete the Contact\n, 4.SearchContactByCity\n, 5.SearchContactByState\n, 6.Exit the loop");
             System.out.println("Enter the choice What you want do");
             int choice = sc.nextInt();
             switch (choice) {
@@ -171,6 +201,14 @@ public class AddressBook {
                     option = true;
                 }
                 case 4 -> {
+                    AddressBook searchContact = new AddressBook();
+                    searchContact.searchPersonByCity();
+                }
+                case 5 -> {
+                    AddressBook searchContact = new AddressBook();
+                    searchContact.searchPersonByState();
+                }
+                case 6 -> {
                     System.exit(0);
                 }
                 default -> {
